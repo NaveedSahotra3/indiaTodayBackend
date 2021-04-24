@@ -53,13 +53,13 @@ var upload = multer({
 
 app.use("uploads", express.static(path.join(_dirname, 'uploads')));
 
-// restaurants CRUD
+// image base article CRUD
 
-// let restaurants = require('./Restaurants/restaurants')
-// app.get('/createrestaurants' , upload.single("image")  , restaurants.create_Res)
-// app.get('/delete_res' , restaurants.Delete_Res)
-// app.get('/update_res' , restaurants.Update_Res)
-// app.get('/gets_res' , restaurants.Gets_Res)
+let imageArticles = require('./ImageArticles/imageArticles')
+app.get('/create_article' , upload.single("image")  , imageArticles.create_article)
+app.get('/delete_article' , imageArticles.Delete_article)
+app.get('/update_article' , imageArticles.Update_article)
+app.get('/gets_article' , imageArticles.Gets_article)
 
 
 
@@ -82,7 +82,7 @@ app.get('/gets_story' , topstory.Gets_story)
 
 
 connectDatabase();
-const PORT = process.env.PORT || 9090
+const PORT = process.env.PORT || 6000
 
 app.listen(PORT , function(){
     console.log('server is started')

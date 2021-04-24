@@ -4,20 +4,20 @@ const app = express()
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const restaurant = require('../DB/restaurants_schema')
+const imageArticle = require('../DB/imageArticle_schema')
 
 
 
 
 
-const restaurants ={
+const imageArticles ={
 
 
-    create_Res : function(req , res){
+    create_article : function(req , res){
         console.log(req.body)
         let image = `${req.file.fieldname}-${req.file.originalname}`
        
-        let newUser = new restaurant({
+        let newUser = new imageArticle({
           title: req.body.title,
           description: req.body.description,
           image
@@ -29,15 +29,15 @@ const restaurants ={
         })
     },
 
-    Delete_Res : async function(req , res){
+    Delete_article : async function(req , res){
 
         console.log(req.body);
 
-        let find = await restaurant.findById(req.body.id);
+        let find = await imageArticle.findById(req.body.id);
   
         if (find) {
           await find.delete();
-          res.json("Restaurant Deleted");
+          res.json("imageArticle Deleted");
           return find;
   
         } else {
@@ -46,7 +46,7 @@ const restaurants ={
         }
     }
 ,
-    Update_Res : async function(req , res){
+    Update_article : async function(req , res){
 
         console.log(req.body.id);
 
@@ -54,7 +54,7 @@ const restaurants ={
         // console.log(find);
         // if (find) {
           let user_id = req.body.id
-       let update =   await restaurant.findOneAndUpdate(
+       let update =   await imageArticle.findOneAndUpdate(
             user_id,
             { title: req.body.title, author: req.body.author },
             function (err, docs) {
@@ -69,10 +69,10 @@ const restaurants ={
           return update;
     },
 
-    Gets_Res : async function(req , res){
+    Gets_article : async function(req , res){
 
         try {
-            const user = await restaurant.find()
+            const user = await imageArticle.find()
             res.json(user)
           } catch (error) {
             console.log(error)
@@ -86,4 +86,4 @@ const restaurants ={
 
 }
 
-module.exports = restaurants;
+module.exports = imageArticles;

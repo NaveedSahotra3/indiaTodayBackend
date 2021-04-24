@@ -40,9 +40,12 @@ const Topstory = {
 
 
   Update_story: async function (req, res) {
-    console.log(req.body.id);
+    console.log(req.params.id);
 
-    let user_id = req.body.id;
+    let image = `${req.file.fieldname}-${req.file.originalname}`;
+   
+    let user_id = req.params.id;
+
     let update = await story.findOneAndUpdate(
       user_id,
       { 

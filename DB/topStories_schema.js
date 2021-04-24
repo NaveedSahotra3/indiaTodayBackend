@@ -6,7 +6,7 @@ const Topstory = new schema({
   storytitle: {
     type: String,
     trim: true,
-    required: true,
+    // required: true,
     max: 64,
   },
 
@@ -18,11 +18,11 @@ const Topstory = new schema({
   description: {
     type: String,
     trim: true,
-    required: true,
+    // required: true,
     max: 64,
   },
 
 
 });
 
-module.exports = mongoose.model("Topstory", Topstory);
+module.exports = mongoose.model("topstory", Topstory);

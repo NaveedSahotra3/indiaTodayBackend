@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 
 const schema = mongoose.Schema
 
-const restaurant = new schema({
+const imageArticle = new schema({
     title: {
         type:  String,
         trim: true,
-        required: true,
+        // required: true,
         max:64
         },
 
@@ -18,7 +18,7 @@ const restaurant = new schema({
         description: {
             type:  String,
             trim: true,
-            required: true,
+            // required: true,
             max:64
             },
     
@@ -29,4 +29,4 @@ const restaurant = new schema({
 
 })
 
-module.exports = mongoose.model("restaurants", restaurant);
+module.exports = mongoose.model("imageArticles", imageArticle);
