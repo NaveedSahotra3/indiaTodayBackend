@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema;
 
-const dish = new schema({
-  dishname: {
+const Topstory = new schema({
+  storytitle: {
     type: String,
     trim: true,
     required: true,
@@ -14,12 +14,6 @@ const dish = new schema({
     type: String,
   },
 
-  price: {
-    type: String,
-    trim: true,
-    required: true,
-    max: 64,
-  },
 
   description: {
     type: String,
@@ -28,12 +22,7 @@ const dish = new schema({
     max: 64,
   },
 
-  ingredients: {
-    type: String,
-    trim: true,
-    required: true,
-    max: 64,
-  },
+
 });
 
-module.exports = mongoose.model("Dish", dish);
+module.exports = mongoose.model("Topstory", Topstory);

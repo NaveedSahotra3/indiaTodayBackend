@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const signup = new Schema({
+const signup_Editor = new Schema({
   name: {
   type:  String,
   trim: true,
@@ -49,4 +49,4 @@ deletedDate: {
 //  {timestamps : true}
  );
 
-module.exports = mongoose.model("graphql", signup);
+module.exports = mongoose.model("editor", signup_Editor);

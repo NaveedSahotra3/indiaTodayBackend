@@ -14,7 +14,7 @@ app.use("uploads", express.static(path.join(_dirname, 'uploads')));
 
 
 // auth signUp login ForgetPassword
-let auth = require('./auth/authentication')
+let auth = require('./auth/admin_authentication')
 app.post('/' , auth.register )
 app.post('/login' , auth.login )
 app.put('/forgetpassword' , auth.forget_password )
@@ -54,20 +54,21 @@ var upload = multer({
 app.use("uploads", express.static(path.join(_dirname, 'uploads')));
 
 // restaurants CRUD
-let restaurants = require('./Restaurants/restaurants')
-app.get('/createrestaurants' , upload.single("image")  , restaurants.create_Res)
-app.get('/delete_res' , restaurants.Delete_Res)
-app.get('/update_res' , restaurants.Update_Res)
-app.get('/gets_res' , restaurants.Gets_Res)
+
+// let restaurants = require('./Restaurants/restaurants')
+// app.get('/createrestaurants' , upload.single("image")  , restaurants.create_Res)
+// app.get('/delete_res' , restaurants.Delete_Res)
+// app.get('/update_res' , restaurants.Update_Res)
+// app.get('/gets_res' , restaurants.Gets_Res)
 
 
 
 // Dish CRUD
-let dish = require('./Dish/Dish')
-app.get('/create_dish' , upload.single("image")  , dish.create_Dish)
-app.get('/delete_dish' ,upload.single("image") , dish.Delete_Dish)
-app.get('/update_dish' , dish.Update_Dish)
-app.get('/gets_dish' , dish.Gets_Dish)
+let topstory = require('./topStroies/topStories')
+app.get('/create_story' , upload.single("image")  , topstory.create_story)
+app.get('/delete_story' ,upload.single("image") , topstory.Delete_story)
+app.get('/update_story' , topstory.Update_story)
+app.get('/gets_story' , topstory.Gets_story)
 
 
 
@@ -81,7 +82,7 @@ app.get('/gets_dish' , dish.Gets_Dish)
 
 
 connectDatabase();
-const PORT = process.env.PORT || 6000
+const PORT = process.env.PORT || 9090
 
 app.listen(PORT , function(){
     console.log('server is started')

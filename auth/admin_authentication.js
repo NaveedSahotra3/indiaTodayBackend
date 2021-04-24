@@ -1,6 +1,6 @@
 
 var bcrypt = require('bcryptjs');
-const User = require('../DB/auth_schema')
+const admin = require('../DB/admin_schema')
 var jwt = require('jsonwebtoken');
 const _ = require('lodash')
 // const mailgun = require('mailgun-js')
@@ -13,7 +13,7 @@ const auth = {
   register: function (req, res) {
     // var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
-    // User.create(
+    // admin.create(
     //   {
     //     name: req.body.name,
     //     email: req.body.email,
@@ -42,7 +42,7 @@ const auth = {
   if (!email || !password) {
       return res.send('Must include email and password')
   }
-  User.findOne({
+  admin.findOne({
       email: email
   }).then(user => {
       if (user) {
@@ -53,7 +53,7 @@ const auth = {
       }
   });
   // The data is valid and new we can register the user
-  let newUser = new User({
+  let newUser = new admin({
       name,
       // username,
       password,
@@ -67,7 +67,7 @@ const auth = {
           newUser.save().then(user => {
               return res.status(201).json({
                   success: true,
-                  msg: "Hurry! User is now registered."
+                  msg: "Hurry! admin is now registered."
               });
           });
       });
@@ -76,7 +76,7 @@ const auth = {
 
   login: function(req, res) {
 
-    User.findOne({ email: req.body.email }, function (err, user) {
+    admin.findOne({ email: req.body.email }, function (err, user) {
       if (err) return res.status(500).send('Error on the server.');
       if (!user) return res.status(404).send('No user found.');
       
@@ -98,7 +98,7 @@ const auth = {
   forget_password: function(req , res){
 //     const {email} =req.body;
 
-// User.findOne({email} , (err , user) =>{
+// admin.findOne({email} , (err , user) =>{
 //   if(err || !user){
 //     return res.status(400).json({error : "user with this email does not exist"})
 //   }
@@ -132,7 +132,7 @@ const auth = {
 
 //   })
 // })
-User.findOne({ email: req.body.email }, function (error, userData) {
+admin.findOne({ email: req.body.email }, function (error, userData) {
   if(userData==null)
   {
       return res.status(404).json({
@@ -172,7 +172,7 @@ User.findOne({ email: req.body.email }, function (error, userData) {
           console.log(error);
       } else {
           console.log('Email sent: ' + info.response);
-          User.updateOne({email: userData.email}, {
+          admin.updateOne({email: userData.email}, {
               token: currentDateTime, 
               
           },  {multi:true},function(err, affected, resp) {
@@ -201,10 +201,10 @@ User.findOne({ email: req.body.email }, function (error, userData) {
 //       error: "Incorrect Token or it is expired"
 //     })
 //   }
-//   User.findOne({resetLink} , (err , user) =>{
+//   admin.findOne({resetLink} , (err , user) =>{
 //     if(err || !user){
 
-// return res.status(400).json({error: "User with this token does not exists "})
+// return res.status(400).json({error: "admin with this token does not exists "})
 
 //     }
 
@@ -232,7 +232,7 @@ User.findOne({ email: req.body.email }, function (error, userData) {
 //       }
 //     }
 
-User.findOne({ email: req.body.email }, function (errorFind, userData) {
+admin.findOne({ email: req.body.email }, function (errorFind, userData) {
   if(userData.token==req.body.linkDate)
   {
       bcrypt.genSalt(10, (errB, salt) => {
@@ -241,18 +241,18 @@ User.findOne({ email: req.body.email }, function (errorFind, userData) {
               let newPassword = hash;
               let condition = { _id: userData._id };
               let dataForUpdate = { password: newPassword,updatedDate: new Date() };
-              User.findOneAndUpdate(condition, dataForUpdate, { new: true }, function (error, updatedUser) {
+              admin.findOneAndUpdate(condition, dataForUpdate, { new: true }, function (error, updatedUser) {
                   if (error) {
                       if (err.name === 'MongoError' && error.code === 11000) {
                         return res.status(500).json({msg:'Mongo Db Error', error:error.message});
                       }else{
-                          return res.status(500).json({msg:'Unknown Server Error', error:'Unknow server error when updating User'});
+                          return res.status(500).json({msg:'Unknown Server Error', error:'Unknow server error when updating admin'});
                       }
                   }
                   else{
                           if (!updatedUser) {
                               return res.status(404).json({
-                                  msg: "User Not Found.",
+                                  msg: "admin Not Found.",
                                   success: false
                               });
                           }else{

@@ -3,19 +3,19 @@ const app = express();
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const dish = require("../DB/Dish_schema");
+const story = require("../DB/topStories_schema");
 
-const Dish = {
-  create_Dish: function (req, res) {
+const Topstory = {
+  create_story: function (req, res) {
     console.log(req.body);
     let image = `${req.file.fieldname}-${req.file.originalname}`;
 
-    let newUser = new dish({
-      dishname: req.body.dishname,
-      price: req.body.price,
+    let newUser = new story({
+      storytitle: req.body.storytitle,
+ 
       image,
       description: req.body.description,
-      ingredients: req.body.ingredients,
+     
     });
 
     newUser.save().then((item) => {
@@ -24,10 +24,10 @@ const Dish = {
   },
 
 
-  Delete_Dish: async function (req, res) {
+  Delete_story: async function (req, res) {
     console.log(req.body);
 
-    let find = await dish.findById(req.body.id);
+    let find = await story.findById(req.body.id);
 
     if (find) {
       await find.delete();
@@ -39,17 +39,17 @@ const Dish = {
   },
 
 
-  Update_Dish: async function (req, res) {
+  Update_story: async function (req, res) {
     console.log(req.body.id);
 
     let user_id = req.body.id;
-    let update = await dish.findOneAndUpdate(
+    let update = await story.findOneAndUpdate(
       user_id,
       { 
-          dishname: req.body.dishname, 
-          price: req.body.price,
+          storytitle: req.body.storytitle, 
+    
           description: req.body.description, 
-          ingredients: req.body.ingredients,
+      
           image
          },
       function (err, docs) {
@@ -64,9 +64,9 @@ const Dish = {
     return update;
   },
 
-  Gets_Dish: async function (req, res) {
+  Gets_story: async function (req, res) {
     try {
-      const user = await dish.find();
+      const user = await story.find();
       res.json(user);
     } catch (error) {
       console.log(error);
@@ -74,4 +74,4 @@ const Dish = {
   },
 };
 
-module.exports = Dish;
+module.exports = Topstory;
