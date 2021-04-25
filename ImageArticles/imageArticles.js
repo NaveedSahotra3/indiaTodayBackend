@@ -24,7 +24,7 @@ const imageArticles ={
         })
       
         newUser.save().then((item) => {
-         
+         console.log(item);
           res.json("Blog created Successfully");
         })
     },

@@ -12,17 +12,14 @@ const Topstory = {
 
     let newUser = new story({
       storytitle: req.body.storytitle,
- 
       image,
       description: req.body.description,
-     
     });
 
     newUser.save().then((item) => {
-      res.json(  "Blog created Successfully");
+      res.json("Story created Successfully");
     });
   },
-
 
   Delete_story: async function (req, res) {
     console.log(req.body);
@@ -31,30 +28,29 @@ const Topstory = {
 
     if (find) {
       await find.delete();
-      res.json("Restaurant Deleted");
+      res.json("Story Deleted");
       return find;
     } else {
-      throw new Error("Book not Found");
+      throw new Error("Story not Found");
     }
   },
-
 
   Update_story: async function (req, res) {
     console.log(req.params.id);
 
     let image = `${req.file.fieldname}-${req.file.originalname}`;
-   
+
     let user_id = req.params.id;
 
     let update = await story.findOneAndUpdate(
       user_id,
-      { 
-          storytitle: req.body.storytitle, 
-    
-          description: req.body.description, 
-      
-          image
-         },
+      {
+        storytitle: req.body.storytitle,
+
+        description: req.body.description,
+
+        image,
+      },
       function (err, docs) {
         if (err) {
           console.log(err);

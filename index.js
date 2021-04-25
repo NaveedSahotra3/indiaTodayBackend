@@ -3,6 +3,10 @@ require("dotenv").config();
 const connectDatabase = require("./DB/connection");
 const app = express()
 const path = require("path");
+const cors = require("cors")
+
+
+app.use(cors())
 
 
 var bodyParser = require('body-parser');
@@ -12,14 +16,14 @@ app.use(bodyParser.json());
 const _dirname = path.resolve()
 app.use("uploads", express.static(path.join(_dirname, 'uploads')));
 
-
+ 
 // auth signUp login ForgetPassword
 let auth = require('./auth/admin_authentication')
-app.post('/' , auth.register )
-app.post('/login' , auth.login )
-app.put('/forgetpassword' , auth.forget_password )
-app.put('/resetpassword' , auth.reset_password )
-app.post('/guest' , auth.Guest )
+app.post('/api/register' , auth.register )
+app.post('/api/login' , auth.login )
+app.put('/api/forgetpassword' , auth.forget_password )
+app.put('/api/resetpassword' , auth.reset_password )
+app.post('/api/guest' , auth.Guest )
 
 // const path = require("path");
 const multer = require("multer")
@@ -51,39 +55,29 @@ var upload = multer({
 //   storage
 // })
 
-app.use("uploads", express.static(path.join(_dirname, 'uploads')));
+app.use("/api/uploads", express.static(path.join(_dirname, 'uploads')));
 
 // image base article CRUD
 
 let imageArticles = require('./ImageArticles/imageArticles')
-app.get('/create_article' , upload.single("image")  , imageArticles.create_article)
-app.get('/delete_article' , imageArticles.Delete_article)
-app.get('/update_article' , imageArticles.Update_article)
-app.get('/gets_article' , imageArticles.Gets_article)
+app.post('/api/create_article' , upload.single("image")  , imageArticles.create_article)
+app.post('/api/delete_article' , imageArticles.Delete_article)
+app.post('/api/update_article' , imageArticles.Update_article)
+app.get('/api/gets_article' , imageArticles.Gets_article)
 
 
 
 // Dish CRUD
 let topstory = require('./topStroies/topStories')
-app.get('/create_story' , upload.single("image")  , topstory.create_story)
-app.get('/delete_story' ,upload.single("image") , topstory.Delete_story)
-app.get('/update_story' , topstory.Update_story)
-app.get('/gets_story' , topstory.Gets_story)
-
-
-
-
-
-
-
-
-
-
+app.post('/api/create_story' , upload.single("image")  , topstory.create_story)
+app.post('/api/delete_story' , topstory.Delete_story)
+app.post('/api/update_story' , topstory.Update_story)
+app.get('/api/gets_story' , topstory.Gets_story)
 
 
 connectDatabase();
-const PORT = process.env.PORT || 6000
+const PORT = process.env.PORT || 9090
 
 app.listen(PORT , function(){
-    console.log('server is started')
+    console.log('server is started on port ' + PORT )
 })

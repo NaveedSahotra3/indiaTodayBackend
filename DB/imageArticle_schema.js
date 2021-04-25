@@ -1,32 +1,22 @@
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose')
-
-const schema = mongoose.Schema
+const schema = mongoose.Schema;
 
 const imageArticle = new schema({
-    title: {
-        type:  String,
-        trim: true,
-        // required: true,
-        max:64
-        },
+  title: {
+    type: String,
+  },
 
-        image:{
-            type : String
-        },
+  image: {
+    type: String,
+  },
 
-        description: {
-            type:  String,
-            trim: true,
-            // required: true,
-            max:64
-            },
-    
-
-        
-
-
-
-})
+  description: {
+    type: String,
+    trim: true,
+    // required: true,
+    max: 64,
+  },
+});
 
 module.exports = mongoose.model("imageArticles", imageArticle);
