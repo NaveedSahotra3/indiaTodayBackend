@@ -43,7 +43,7 @@ const auth = {
             msg: "Hurry! admin is now registered.",
           });
         });
-      });
+      }); 
     });
   },
 
