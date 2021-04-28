@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const _dirname = path.resolve();
 app.use("uploads", express.static(path.join(_dirname, "uploads")));
 
-// auth signUp login ForgetPassword
+
 let auth = require("./auth/admin_authentication");
 app.post("/api/register", auth.register);
 app.post("/api/login", auth.login);
