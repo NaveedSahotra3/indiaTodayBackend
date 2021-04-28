@@ -88,6 +88,16 @@ app.post("/api/editor/delete", Editor.deteleEditor);
 app.post("/api/editr/update", Editor.updateEditor);
 app.get("/api/editor/get_all", Editor.get_all_Editor);
 
+
+app.use(express.static('./build'))
+
+app.use('*', (req, res) => {
+
+    res.sendfile('./build/index.html');
+
+});
+
+
 connectDatabase();
 const PORT = process.env.PORT || 9090;
 
