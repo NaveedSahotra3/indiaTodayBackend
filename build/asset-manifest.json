@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5b2024ec.chunk.css",
+    "main.js": "/static/js/main.680f2dd6.chunk.js",
+    "main.js.map": "/static/js/main.680f2dd6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.836b504c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.836b504c.js.map",
+    "static/css/2.1e29cf76.chunk.css": "/static/css/2.1e29cf76.chunk.css",
+    "static/js/2.4836dc61.chunk.js": "/static/js/2.4836dc61.chunk.js",
+    "static/js/2.4836dc61.chunk.js.map": "/static/js/2.4836dc61.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.b268a4ec1115ea0646e5e054d19346b4.js": "/precache-manifest.b268a4ec1115ea0646e5e054d19346b4.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.1e29cf76.chunk.css.map": "/static/css/2.1e29cf76.chunk.css.map",
+    "static/css/main.5b2024ec.chunk.css.map": "/static/css/main.5b2024ec.chunk.css.map",
+    "static/js/2.4836dc61.chunk.js.LICENSE.txt": "/static/js/2.4836dc61.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/static/media/OpenSans-Regular.629a55a7.ttf",
+    "static/media/main.css": "/static/media/flags@2x.7de34bf2.png",
+    "static/media/bootstrap.min.css": "/static/media/glyphicons-halflings-regulard41d.f4769f9b.eot",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.836b504c.js",
+    "static/css/2.1e29cf76.chunk.css",
+    "static/js/2.4836dc61.chunk.js",
+    "static/css/main.5b2024ec.chunk.css",
+    "static/js/main.680f2dd6.chunk.js"
+  ]
+}
