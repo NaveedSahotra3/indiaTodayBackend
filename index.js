@@ -1,6 +1,6 @@
 const express = require("express");
 require("dotenv").config();
-const connectDatabase = require("./DB/connection");
+const connectDatabase = require("./config/connection");
 const app = express();
 const path = require("path");
 const cors = require("cors");
@@ -13,14 +13,6 @@ app.use(bodyParser.json());
 
 const _dirname = path.resolve();
 app.use("uploads", express.static(path.join(_dirname, "uploads")));
-
-// auth signUp login ForgetPassword
-let auth = require("./auth/admin_authentication");
-app.post("/api/register", auth.register);
-app.post("/api/login", auth.login);
-app.put("/api/forgetpassword", auth.forget_password);
-app.put("/api/resetpassword", auth.reset_password);
-app.post("/api/guest", auth.Guest);
 
 // const path = require("path");
 const multer = require("multer");
@@ -62,9 +54,19 @@ var upload = multer({
 
 app.use("/api/uploads", express.static(path.join(_dirname, "uploads")));
 
-// image base article CRUD
 
-let imageArticles = require("./ImageArticles/imageArticles");
+
+// auth signUp login ForgetPassword
+let auth = require("./routes/auth/admin_authentication");
+app.post("/api/register", auth.register);
+app.post("/api/login", auth.login);
+app.put("/api/forgetpassword", auth.forget_password);
+app.put("/api/resetpassword", auth.reset_password);
+app.post("/api/guest", auth.Guest);
+
+
+// image base article CRUD
+let imageArticles = require("./routes/ImageArticles/imageArticles");
 app.post(
   "/api/create_article",
   upload.single("image"),
@@ -75,18 +77,26 @@ app.post("/api/update_article", imageArticles.Update_article);
 app.get("/api/gets_article", imageArticles.Gets_article);
 
 // Dish CRUD
-let topstory = require("./topStroies/topStories");
+let topstory = require("./routes/topStroies/topStories");
 app.post("/api/create_story", upload.single("image"), topstory.create_story);
 app.post("/api/delete_story", topstory.Delete_story);
 app.post("/api/update_story", topstory.Update_story);
 app.get("/api/gets_story", topstory.Gets_story);
 
 // Editor CRUD by admin only
-let Editor = require("./Editor/Editor");
+let Editor = require("./routes/Editor/Editor");
 app.post("/api/editor/add", upload.single("image"), Editor.addEditor);
 app.post("/api/editor/delete", Editor.deteleEditor);
 app.post("/api/editr/update", Editor.updateEditor);
 app.get("/api/editor/get_all", Editor.get_all_Editor);
+
+// Categories 
+let Categories = require("./routes/Categories/Categories");
+app.post("/api/categories/add", upload.single("image"), Categories.addCategory);
+app.post("/api/categories/delete", Categories.deteleCategory);
+app.post("/api/categories/update", Categories.updateCategory);
+app.get("/api/categories/get_all", Categories.get_all_Category);
+
 
 
 app.use(express.static('./build'))

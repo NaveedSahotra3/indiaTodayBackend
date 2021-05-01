@@ -1,0 +1,92 @@
+const imageArticle = require("../../Models/imageArticle_schema");
+const CategorySchema = require("../../Models/category_schema")
+const imageArticles = {
+  create_article: async function (req, res) {
+    try {
+      let { title, description, category_id } = req.body;
+      let image;
+      if (req.file) image = `${req.file.fieldname}-${req.file.originalname}`;
+
+      // The data is valid and new we can register the user
+      let newUser = new imageArticle({
+        title,
+        description,
+        image,
+        category_id,
+      });
+
+      let result = await newUser.save();
+
+      return res.json(result);
+    } catch (err) {
+      return res.status(err.status || 500).send(err.message);
+    }
+  },
+
+  Delete_article: async function (req, res) {
+ 
+
+    let find = await imageArticle.findById(req.body.id);
+
+    if (find) {
+      await find.delete();
+      res.json("imageArticle Deleted");
+      return find;
+    } else {
+      throw new Error("Book not Found");
+    }
+  },
+  Update_article: async function (req, res) {
+    console.log(req.body.id);
+
+    // let find = await BookSchema.findById(req.body.id);
+    // console.log(find);
+    // if (find) {
+    let user_id = req.body.id;
+    let update = await imageArticle.findOneAndUpdate(
+      user_id,
+      { title: req.body.title, author: req.body.author },
+      function (err, docs) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json("Restaturant successfully updated");
+          console.log("Updated User : ", docs);
+        }
+      }
+    );
+    return update;
+  },
+
+  Gets_article: async function (req, res) {
+    try {
+      const user = await imageArticle.find();
+      const cate = await CategorySchema.find();
+
+      let all = []
+      for (let i = 0; i < user.length; i++) {
+        const element_i = user[i];
+        for (let j = 0; j < cate.length; j++) {
+          const element_j = cate[j];
+          if(element_i.category_id.toString() == element_j._id.toString()){
+            let obj = {
+              description:element_i.description,
+              title:element_i.title,
+              image:element_i.image,
+              category_name: element_j.category_name,
+              _id: element_i._id
+            }
+            all.push(obj)
+          }
+        }
+               
+      }
+      
+      return res.json(all);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+
+module.exports = imageArticles;
