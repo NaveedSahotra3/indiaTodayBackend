@@ -36,11 +36,7 @@ const storage = multer.diskStorage({
 var upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
-    ) {
+    if (file.mimetype == "image/png" ||file.mimetype == "image/jpg" ||file.mimetype == "image/jpeg") {
       cb(null, true);
     } else {
       cb(null, false);
@@ -54,8 +50,6 @@ var upload = multer({
 
 app.use("/api/uploads", express.static(path.join(_dirname, "uploads")));
 
-
-
 // auth signUp login ForgetPassword
 let auth = require("./routes/auth/admin_authentication");
 app.post("/api/register", auth.register);
@@ -63,7 +57,6 @@ app.post("/api/login", auth.login);
 app.put("/api/forgetpassword", auth.forget_password);
 app.put("/api/resetpassword", auth.reset_password);
 app.post("/api/guest", auth.Guest);
-
 
 // image base article CRUD
 let imageArticles = require("./routes/ImageArticles/imageArticles");
@@ -75,6 +68,7 @@ app.post(
 app.post("/api/delete_article", imageArticles.Delete_article);
 app.post("/api/update_article", imageArticles.Update_article);
 app.get("/api/gets_article", imageArticles.Gets_article);
+app.get("/api/get_featured_article", imageArticles.getFeaturedItems);
 
 // Dish CRUD
 let topstory = require("./routes/topStroies/topStories");
@@ -82,6 +76,19 @@ app.post("/api/create_story", upload.single("image"), topstory.create_story);
 app.post("/api/delete_story", topstory.Delete_story);
 app.post("/api/update_story", topstory.Update_story);
 app.get("/api/gets_story", topstory.Gets_story);
+app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
+
+// Dish CRUD
+let videoArticle = require("./routes/VideoArticle/VideoArticle");
+app.post(
+  "/api/create_video",
+  upload.single("image"),
+  videoArticle.create_video
+);
+app.post("/api/delete_video", videoArticle.Delete_video);
+app.post("/api/update_video", videoArticle.Update_video);
+app.get("/api/gets_video", videoArticle.Gets_video);
+app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
 
 // Editor CRUD by admin only
 let Editor = require("./routes/Editor/Editor");
@@ -90,23 +97,32 @@ app.post("/api/editor/delete", Editor.deteleEditor);
 app.post("/api/editr/update", Editor.updateEditor);
 app.get("/api/editor/get_all", Editor.get_all_Editor);
 
-// Categories 
+// Categories
 let Categories = require("./routes/Categories/Categories");
 app.post("/api/categories/add", upload.single("image"), Categories.addCategory);
 app.post("/api/categories/delete", Categories.deteleCategory);
 app.post("/api/categories/update", Categories.updateCategory);
 app.get("/api/categories/get_all", Categories.get_all_Category);
 
+// Sub-Categories
+let SubCategories = require("./routes/SubCategories/SubCategories");
+app.post("/api/SubCategories/add", SubCategories.addCategory);
+app.post("/api/SubCategories/delete", SubCategories.deteleCategory);
+app.post("/api/SubCategories/update", SubCategories.updateCategory);
+app.get("/api/SubCategories/get_all", SubCategories.get_all_Category);
 
+// Banners
+let Banner = require("./routes/Banner/Banner");
+app.post("/api/banner/add", upload.single("image"), Banner.add);
+app.post("/api/banner/delete", Banner.detele);
+app.post("/api/banner/update", Banner.update);
+app.get("/api/banner/get_all", Banner.get_all);
 
-app.use(express.static('./build'))
+app.use(express.static("./build"));
 
-app.use('*', (req, res) => {
-
-    res.sendfile('./build/index.html');
-
+app.use("*", (req, res) => {
+  res.sendfile("./build/index.html");
 });
-
 
 connectDatabase();
 const PORT = process.env.PORT || 9090;

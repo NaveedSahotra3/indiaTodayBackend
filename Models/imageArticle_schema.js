@@ -19,6 +19,11 @@ const imageArticle = new schema(
     category_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref:"categories"
+    },
+    isFeatured: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   {

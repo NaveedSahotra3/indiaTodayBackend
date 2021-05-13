@@ -1,4 +1,5 @@
 const CategorySchema = require("../../Models/category_schema");
+const sub_category_schema = require("../../Models/sub_category_schema");
 const Category = {
   addCategory: async function (req, res) {
     try {
@@ -31,7 +32,7 @@ const Category = {
   deteleCategory: async function (req, res) {
     try {
       let { category_id } = req.body;
-      
+
       // Check this is admin
       let Category = await CategorySchema.findById({ _id: category_id });
       if (!Category) throw res.status(400).json({ msg: "Category Not found." });
@@ -40,7 +41,7 @@ const Category = {
 
       return res.status(201).json({
         success: true,
-        msg: "Successfully Deleted"
+        msg: "Successfully Deleted",
       });
     } catch (err) {
       return res.status(err.status || 500).send(err.message);
@@ -56,7 +57,7 @@ const Category = {
       let Category = await CategorySchema.findById({ _id: Category_id });
       if (!Category) throw res.status(400).json({ msg: "Category Not found." });
 
-      delete data.category_id
+      delete data.category_id;
       let update = await CategorySchema.findOneAndUpdate(
         { _id: Category_id },
         { ...data },
@@ -78,7 +79,28 @@ const Category = {
   get_all_Category: async function (req, res) {
     try {
       const user = await CategorySchema.find();
-      res.json(user);
+      const sub_category = await sub_category_schema.find();
+      let all = [];
+      for (let i = 0; i < user.length; i++) {
+        const element_i = user[i];
+        let sub_cate = [];
+        for (let j = 0; j < sub_category.length; j++) {
+          const element_j = sub_category[j];
+          if (element_j.category_id.toString() == element_i._id.toString()) {
+            sub_cate.push(element_j);
+          }
+        }
+        let obj = {
+          _id: element_i._id,
+          category_name: element_i.category_name,
+          description:element_i.description,
+          image:element_i.image,
+          sub_cate
+        }
+        all.push(obj)
+      }
+
+      res.json(all);
     } catch (error) {
       console.log(error);
     }
