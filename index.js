@@ -74,7 +74,7 @@ app.post("/api/delete_article", imageArticles.Delete_article);
 app.post("/api/update_article", imageArticles.Update_article);
 app.get("/api/gets_article", imageArticles.Gets_article);
 
-// Dish CRUD
+// TopStories CRUD
 let topstory = require("./topStroies/topStories");
 app.post("/api/create_story", upload.single("image"), topstory.create_story);
 app.post("/api/delete_story", topstory.Delete_story);
