@@ -8,10 +8,8 @@ const Sub_Category = {
       if (req.file) {
         data.image = `${req.file.fieldname}-${req.file.originalname}`;
       }
-
       // The data is valid and new we can register the user
       let banner = new Banner(data);
-
       let result = await banner.save();
 
       return res.json(result);
@@ -23,7 +21,6 @@ const Sub_Category = {
   detele: async function (req, res) {
     try {
       let { id } = req.body;
-
       // Check this is admin
       let banner = await Banner.findById({
         _id: id,
@@ -47,6 +44,7 @@ const Sub_Category = {
       let Sub_Category = await SubCategorySchema.findById({
         _id: sub_category_id,
       });
+
       if (!Category)
         throw res.status(400).json({ msg: "Sub-Category Not found." });
 
