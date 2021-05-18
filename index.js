@@ -74,7 +74,8 @@ app.post("/api/update_article", imageArticles.Update_article);
 app.get("/api/gets_article", imageArticles.Gets_article);
 app.get("/api/get_featured_article", imageArticles.getFeaturedItems);
 
-// Dish CRUD
+
+// Top Story
 let topstory = require("./routes/topStroies/topStories");
 app.post("/api/create_story", upload.single("image"), topstory.create_story);
 app.post("/api/delete_story", topstory.Delete_story);
@@ -82,7 +83,7 @@ app.post("/api/update_story", topstory.Update_story);
 app.get("/api/gets_story", topstory.Gets_story);
 app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
 
-// Dish CRUD
+// Video Crud
 let videoArticle = require("./routes/VideoArticle/VideoArticle");
 app.post(
   "/api/create_video",
@@ -121,6 +122,27 @@ app.post("/api/banner/add", upload.single("image"), Banner.add);
 app.post("/api/banner/delete", Banner.detele);
 app.post("/api/banner/update", Banner.update);
 app.get("/api/banner/get_all", Banner.get_all);
+
+// Header
+let Header = require("./routes/Header/Header");
+app.post("/api/header/add", Header.add);
+app.post("/api/header/delete", Header.detele);
+app.post("/api/header/update", Header.update);
+app.get("/api/header/get_all", Header.get_all);
+app.post("/api/header/get_one", Header.get_one);
+
+// Footer
+let Footer = require("./routes/Footer/Footer");
+app.post("/api/footer/add", Footer.add);
+app.post("/api/footer/delete", Footer.detele);
+app.post("/api/footer/update", Footer.update);
+app.get("/api/footer/get_all", Footer.get_all);
+app.post("/api/footer/get_one", Footer.get_one);
+
+
+
+
+
 
 app.use(express.static("./build"));
 
