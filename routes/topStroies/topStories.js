@@ -38,26 +38,25 @@ const Topstory = {
       throw new Error("Story not Found");
     }
   },
-
   Update_story: async function (req, res) {
-    let image = `${req.file.fieldname}-${req.file.originalname}`;
-    let user_id = req.params.id;
-    let update = await story.findOneAndUpdate(
-      user_id,
-      {
-        storytitle: req.body.storytitle,
-        description: req.body.description,
-        image,
-      },
-      function (err, docs) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.json("Restaturant successfully updated");
-          console.log("Updated User : ", docs);
-        }
-      }
-    );
+    console.log(req.body.id.id);
+    let data = Object.assign({}, req.body);
+    let user_id = req.body.id;
+    let image;
+    if (req.file) {
+      image = `${req.file.fieldname}-${req.file.originalname}`;
+      data.image = image;
+    }
+    if (data.isFeatured) {
+      data.isFeatured == "on"
+        ? (data.isFeatured = true)
+        : (data.isFeatured = false);
+    }
+    delete data.id
+    let update = await story.findOneAndUpdate({ _id: user_id }, data, {
+      isNew: true,
+    });
+
     return update;
   },
   Gets_story: async function (req, res) {

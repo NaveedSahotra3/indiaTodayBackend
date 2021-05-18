@@ -36,21 +36,27 @@ const imageArticles = {
       throw new Error("Book not Found");
     }
   },
-  Update_video: async function (req, res) {
 
+
+  Update_video: async function (req, res) {
+    console.log(req.body.id.id);
+    let data = Object.assign({}, req.body);
     let user_id = req.body.id;
-    let update = await videoArticle.findOneAndUpdate(
-      user_id,
-      { title: req.body.title, author: req.body.author },
-      function (err, docs) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.json("Restaturant successfully updated");
-          console.log("Updated User : ", docs);
-        }
-      }
-    );
+    let image;
+    if (req.file) {
+      image = `${req.file.fieldname}-${req.file.originalname}`;
+      data.image = image;
+    }
+    if (data.isFeatured) {
+      data.isFeatured == "on"
+        ? (data.isFeatured = true)
+        : (data.isFeatured = false);
+    }
+    delete data.id
+    let update = await videoArticle.findOneAndUpdate({ _id: user_id }, data, {
+      isNew: true,
+    });
+
     return update;
   },
 

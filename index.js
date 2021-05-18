@@ -39,7 +39,13 @@ var upload = multer({
     if (
       file.mimetype == "image/png" ||
       file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
+      file.mimetype == "image/jpeg" ||
+    
+      file.mimetype == "video/webm" ||
+      file.mimetype == "video/mp4" ||
+      file.mimetype == "video/mav" 
+
+
     ) {
       cb(null, true);
     } else {
@@ -70,19 +76,19 @@ app.post(
   imageArticles.create_article
 );
 app.post("/api/delete_article", imageArticles.Delete_article);
-app.post("/api/update_article", imageArticles.Update_article);
+app.post("/api/update_article",  upload.single("image"), imageArticles.Update_article);
 app.get("/api/gets_article", imageArticles.Gets_article);
 app.get("/api/get_featured_article", imageArticles.getFeaturedItems);
 
-// Dish CRUD
+// TopStory CRUD
 let topstory = require("./routes/topStroies/topStories");
 app.post("/api/create_story", upload.single("image"), topstory.create_story);
 app.post("/api/delete_story", topstory.Delete_story);
-app.post("/api/update_story", topstory.Update_story);
+app.post("/api/update_story", upload.single("image"),  topstory.Update_story);
 app.get("/api/gets_story", topstory.Gets_story);
 app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
 
-// Dish CRUD
+// Video CRUD
 let videoArticle = require("./routes/VideoArticle/VideoArticle");
 app.post(
   "/api/create_video",
@@ -90,7 +96,7 @@ app.post(
   videoArticle.create_video
 );
 app.post("/api/delete_video", videoArticle.Delete_video);
-app.post("/api/update_video", videoArticle.Update_video);
+app.post("/api/update_video",upload.single("image"),  videoArticle.Update_video);
 app.get("/api/gets_video", videoArticle.Gets_video);
 app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
 
@@ -119,7 +125,7 @@ app.get("/api/SubCategories/get_all", SubCategories.get_all_Category);
 let Banner = require("./routes/Banner/Banner");
 app.post("/api/banner/add", upload.single("image"), Banner.add);
 app.post("/api/banner/delete", Banner.detele);
-app.post("/api/banner/update", Banner.update);
+app.post("/api/banner/update", upload.single("image") ,Banner.update);
 app.get("/api/banner/get_all", Banner.get_all);
 
 app.use(express.static("./build"));

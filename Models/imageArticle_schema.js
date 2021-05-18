@@ -3,7 +3,13 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const imageArticle = new schema(
+ 
+ 
   {
+
+    id: {
+      type: String,
+    },
     title: {
       type: String,
     },

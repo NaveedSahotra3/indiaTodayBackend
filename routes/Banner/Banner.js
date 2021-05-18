@@ -38,33 +38,25 @@ const Sub_Category = {
   },
 
   update: async function (req, res) {
-    try {
-      let data = Object.assign({}, req.body);
-      let sub_category_id = data.sub_category_id;
-      let Sub_Category = await SubCategorySchema.findById({
-        _id: sub_category_id,
-      });
-
-      if (!Category)
-        throw res.status(400).json({ msg: "Sub-Category Not found." });
-
-      delete data.sub_category_id;
-      let update = await SubCategorySchema.findOneAndUpdate(
-        { _id: sub_category_id },
-        { ...data },
-        function (err, docs) {
-          if (err) {
-            console.log(err);
-          } else {
-            res.json("Sub-Category successfully updated");
-            console.log("Updated User : ", docs);
-          }
-        }
-      );
-      return update;
-    } catch (err) {
-      return res.status(err.status || 500).send(err.message);
+    console.log(req.body.id.id);
+    let data = Object.assign({}, req.body);
+    let user_id = req.body.id;
+    let image;
+    if (req.file) {
+      image = `${req.file.fieldname}-${req.file.originalname}`;
+      data.image = image;
     }
+    if (data.isFeatured) {
+      data.isFeatured == "on"
+        ? (data.isFeatured = true)
+        : (data.isFeatured = false);
+    }
+    delete data.id
+    let update = await Banner.findOneAndUpdate({ _id: user_id }, data, {
+      isNew: true,
+    });
+
+    return update;
   },
 
   get_all: async function (req, res) {

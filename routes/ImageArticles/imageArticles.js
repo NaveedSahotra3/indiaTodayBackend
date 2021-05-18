@@ -37,24 +37,24 @@ const imageArticles = {
     }
   },
   Update_article: async function (req, res) {
-    console.log(req.body.id);
-
-    // let find = await BookSchema.findById(req.body.id);
-    // console.log(find);
-    // if (find) {
+    console.log(req.body.id.id);
+    let data = Object.assign({}, req.body);
     let user_id = req.body.id;
-    let update = await imageArticle.findOneAndUpdate(
-      user_id,
-      { title: req.body.title, author: req.body.author },
-      function (err, docs) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.json("Restaturant successfully updated");
-          console.log("Updated User : ", docs);
-        }
-      }
-    );
+    let image;
+    if (req.file) {
+      image = `${req.file.fieldname}-${req.file.originalname}`;
+      data.image = image;
+    }
+    if (data.isFeatured) {
+      data.isFeatured == "on"
+        ? (data.isFeatured = true)
+        : (data.isFeatured = false);
+    }
+
+    let update = await imageArticle.findOneAndUpdate({ _id: user_id }, data, {
+      isNew: true,
+    });
+
     return update;
   },
 
@@ -75,7 +75,7 @@ const imageArticles = {
               image: element_i.image,
               category_name: element_j.category_name,
               _id: element_i._id,
-              isFeatured: element_i.isFeatured
+              isFeatured: element_i.isFeatured,
             };
             all.push(obj);
           }
