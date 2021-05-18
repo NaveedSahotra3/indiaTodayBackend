@@ -24,12 +24,11 @@ const Banners = new schema(
       type: String,
       required: false,
     },
-
-    // banner_type: {
-    //   type: Number,
-    //   enum: [1, 2, 3], // 1-> Dont Miss at Landing page , 2-> Today's Special, 3-> Photos
-    //   default: 1,
-    // },
+    banner_type: {
+      type: Number,
+      enum: [1, 2, 3], // 1-> Dont Miss at Landing page , 2-> Today's Special, 3-> Photos
+      default: 1,
+    },
     // isFeatured: {
     //   type: Boolean,
     //   required: false,
