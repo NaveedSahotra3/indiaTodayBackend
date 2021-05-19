@@ -114,6 +114,8 @@ app.post("/api/categories/add", upload.single("image"), Categories.addCategory);
 app.post("/api/categories/delete", Categories.deteleCategory);
 app.post("/api/categories/update", Categories.updateCategory);
 app.get("/api/categories/get_all", Categories.get_all_Category);
+app.post("/api/categories/get_one", Categories.get_one_Category);
+
 
 // Sub-Categories
 let SubCategories = require("./routes/SubCategories/SubCategories");

@@ -105,6 +105,23 @@ const Category = {
       console.log(error);
     }
   },
+
+
+  get_one_Category: async function (req, res) {
+    try {
+      let data = Object.assign({}, req.body);
+      let categoryId = req.body.id;
+      let singleCategory = await CategorySchema.findById(categoryId).lean();
+      const sub_category = await sub_category_schema.find({category_id: categoryId});
+      singleCategory.sub_cate = sub_category
+
+      console.log(singleCategory)
+      res.json(singleCategory );
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
 };
 
 module.exports = Category;
