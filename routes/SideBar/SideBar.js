@@ -1,12 +1,12 @@
-const HeaderSchema = require("../../Models/header_schema");
+const SideBarSchema = require("../../Models/sidebar_schema");
 // const SubCategorySchema = require("../../Models/sub_category_schema");
-const Header = {
+const SideBar = {
   add: async function (req, res) {
     try {
       let data = Object.assign({}, req.body);
       // The data is valid and new we can register the user
-      let header = new HeaderSchema(data);
-      let result = await header.save();
+      let sidebar = new SideBarSchema(data);
+      let result = await sidebar.save();
 
       return res.json(result);
     } catch (err) {
@@ -18,12 +18,12 @@ const Header = {
     try {
       let { _id } = req.body;
       // Check this is admin
-      let header = await HeaderSchema.findById({
-        _id:_id,
+      let Sidebar = await SideBarSchema.findById({
+        _id: _id,
       });
-      if (!header)
-        throw res.status(400).json({ msg: "Sub-Category Not found." });
-      let deleted = await header.delete();
+      if (!Sidebar)
+        throw res.status(400).json({ msg: "Sidebar Section Not found." });
+      let deleted = await Sidebar.delete();
       return res.status(201).json({
         success: true,
         msg: "Successfully Deleted",
@@ -36,21 +36,21 @@ const Header = {
   update: async function (req, res) {
     try {
       let data = Object.assign({}, req.body);
-      let headerId = data._id;
-      let header = await HeaderSchema.findById({
-        _id: headerId,
+      let sidebarId = data._id;
+      let SideBar = await SideBarSchema.findById({
+        _id: sidebarId,
       });
 
-      if (!header)
-        throw res.status(400).json({ msg: "Header Item Not found." });
+      if (!SideBar)
+        throw res.status(400).json({ msg: "SideBar Item Not found." });
 
       delete data._id;
-      let update = await HeaderSchema.findOneAndUpdate(
-        { _id: headerId },
+      let update = await SideBarSchema.findOneAndUpdate(
+        { _id: sidebarId },
         { ...data }
       );
       
-      return res.json("Header successfully updated");
+      return res.json("SideBar successfully updated");
     } catch (err) {
       return res.status(err.status || 500).send(err.message);
     }
@@ -58,7 +58,7 @@ const Header = {
 
   get_all: async function (req, res) {
     try {
-      const user = await HeaderSchema.find();
+      const user = await SideBarSchema.find();
       res.json(user);
     } catch (error) {
       console.log(error);
@@ -67,16 +67,16 @@ const Header = {
   get_one: async function (req, res) {
     try {
       let data = Object.assign({}, req.body);
-      let headerId = data._id;
-      let header = await HeaderSchema.findById({
-        _id: headerId,
+      let sidebarId = data._id;
+      let SideBar = await SideBarSchema.findById({
+        _id: sidebarId,
       });
 
-      res.json(header );
+      res.json(SideBar);
     } catch (error) {
       console.log(error);
     }
   },
 };
 
-module.exports = Header;
+module.exports = SideBar;

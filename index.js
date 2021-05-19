@@ -145,6 +145,14 @@ app.post("/api/footer/update", Footer.update);
 app.get("/api/footer/get_all", Footer.get_all);
 app.post("/api/footer/get_one", Footer.get_one);
 
+// SideBar
+let SideBar = require("./routes/SideBar/SideBar");
+app.post("/api/sidebar/add", SideBar.add);
+app.post("/api/sidebar/delete", SideBar.detele);
+app.post("/api/sidebar/update", SideBar.update);
+app.get("/api/sidebar/get_all", SideBar.get_all);
+app.post("/api/sidebar/get_one", SideBar.get_one);
+
 
 
 
