@@ -8,9 +8,7 @@ var nodemailer = require("nodemailer");
 
 const auth = {
   register: function (req, res) {
-    
     let { name, email, password } = req.body;
-
     if (!email || !password) {
       return res.send("Must include email and password");
     }
@@ -59,6 +57,19 @@ const auth = {
       if (!passwordIsValid)
         return res.status(401).send({ auth: false, token: null });
 
+      var token = jwt.sign({ id: user._id }, "kjdfadskjhkjkhfnf", {
+        expiresIn: 86400, // expires in 24 hours
+      });
+
+      res.status(200).send({ auth: true, token: token, user });
+    });
+  },
+  getProfile: function (req, res) {
+    
+    admin.findOne({ _id: req.body.id }, function (err, user) {
+      if (err) return res.status(500).send("Error on the server.");
+      if (!user) return res.status(404).send("No user found.");
+     
       var token = jwt.sign({ id: user._id }, "kjdfadskjhkjkhfnf", {
         expiresIn: 86400, // expires in 24 hours
       });

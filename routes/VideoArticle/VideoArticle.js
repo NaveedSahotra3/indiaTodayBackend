@@ -4,25 +4,25 @@ const CategorySchema = require("../../Models/category_schema");
 const vidArticle = {
   create_video: async function (req, res) {
     try {
-      let { title, description, category_id, isFeatured,sub_category } = req.body;
+      let { storytitle, description, category_id, isFeatured, sub_category } =
+        req.body;
       let image;
       if (req.file) image = `${req.file.fieldname}-${req.file.originalname}`;
 
       isFeatured == "on" ? (isFeatured = true) : (isFeatured = false);
       // The data is valid and new we can register the user
       let newUser = new videoArticle({
-        storytitle,
+        title:storytitle,
         description,
         image,
         category_id,
         isFeatured: isFeatured,
-        sub_category
+        sub_category,
       });
 
       let result = await newUser.save();
 
       return res.json(result);
-      
     } catch (err) {
       return res.status(err.status || 500).send(err.message);
     }
@@ -32,14 +32,13 @@ const vidArticle = {
     let find = await videoArticle.findById(req.body.id);
 
     if (find) {
-      await find.delete();
-      res.json("videoArticle Deleted");
-      return find;
+      let result = await find.delete();
+
+      return res.json("videoArticle Deleted");
     } else {
       throw new Error("Book not Found");
     }
   },
-
 
   Update_video: async function (req, res) {
     console.log(req.body.id.id);
@@ -55,13 +54,12 @@ const vidArticle = {
         ? (data.isFeatured = true)
         : (data.isFeatured = false);
     }
-    delete data.id
+    delete data.id;
     // let update = await videoArticle.findOneAndUpdate({ _id: user_id }, data, {
     //   isNew: true,
     // });
 
     return res.json("Successfuly Updated");
-
   },
 
   Gets_video: async function (req, res) {
@@ -81,7 +79,7 @@ const vidArticle = {
               image: element_i.image,
               category_name: element_j.category_name,
               _id: element_i._id,
-              isFeatured: element_i.isFeatured
+              isFeatured: element_i.isFeatured,
             };
             all.push(obj);
           }

@@ -15,7 +15,6 @@ const signup = new Schema(
       default: false
     },
     isEditor : {
-
       type: Boolean,
       default: false
     },
@@ -29,6 +28,10 @@ const signup = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String,
+      required: false,
     },
     resetLink: {
       data: String,

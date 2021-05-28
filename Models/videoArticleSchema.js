@@ -6,6 +6,7 @@ const videoArticle = new schema(
   {
     title: {
       type: String,
+      required:false
     },
 
     image: {

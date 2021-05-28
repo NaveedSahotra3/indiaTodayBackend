@@ -67,6 +67,7 @@ app.post("/api/login", auth.login);
 app.put("/api/forgetpassword", auth.forget_password);
 app.put("/api/resetpassword", auth.reset_password);
 app.post("/api/guest", auth.Guest);
+app.post("/api/get_profile", auth.getProfile);
 
 // image base article CRUD
 let imageArticles = require("./routes/ImageArticles/imageArticles");
@@ -107,6 +108,7 @@ app.post("/api/editor/add", upload.single("image"), Editor.addEditor);
 app.post("/api/editor/delete", Editor.deteleEditor);
 app.post("/api/editr/update", Editor.updateEditor);
 app.get("/api/editor/get_all", Editor.get_all_Editor);
+app.post("/api/editor/login", Editor.login);
 
 // Categories
 let Categories = require("./routes/Categories/Categories");
