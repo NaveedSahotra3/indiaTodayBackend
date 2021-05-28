@@ -1,6 +1,6 @@
 const Banner = require("../../Models/banners");
 // const SubCategorySchema = require("../../Models/sub_category_schema");
-const Sub_Category = {
+const Banners = {
   add: async function (req, res) {
     try {
       let data = Object.assign({}, req.body);
@@ -69,4 +69,4 @@ const Sub_Category = {
   },
 };
 
-module.exports = Sub_Category;
+module.exports = Banners;

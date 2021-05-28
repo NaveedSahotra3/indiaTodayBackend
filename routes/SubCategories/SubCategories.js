@@ -79,6 +79,15 @@ const Sub_Category = {
       console.log(error);
     }
   },
+  getone: async function (req, res) {
+    try {
+      let data = Object.assign({},req.body)
+      const result = await SubCategorySchema.find(data);
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 module.exports = Sub_Category;

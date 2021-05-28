@@ -1,9 +1,12 @@
 const imageArticle = require("../../Models/imageArticle_schema");
 const CategorySchema = require("../../Models/category_schema");
+const sub_category_schema = require("../../Models/sub_category_schema");
+
+
 const imageArticles = {
   create_article: async function (req, res) {
     try {
-      let { title, description, category_id, isFeatured } = req.body;
+      let { title, description, category_id, isFeatured,sub_category } = req.body;
       let image;
       if (req.file) image = `${req.file.fieldname}-${req.file.originalname}`;
 
@@ -15,6 +18,7 @@ const imageArticles = {
         image,
         category_id,
         isFeatured: isFeatured,
+        sub_category
       });
 
       let result = await newUser.save();
@@ -60,15 +64,16 @@ const imageArticles = {
 
   Gets_article: async function (req, res) {
     try {
-      const user = await imageArticle.find();
+      const articles = await imageArticle.find();
       const cate = await CategorySchema.find();
 
       let all = [];
-      for (let i = 0; i < user.length; i++) {
-        const element_i = user[i];
+      for (let i = 0; i < articles.length; i++) {
+        const element_i = articles[i];
         for (let j = 0; j < cate.length; j++) {
           const element_j = cate[j];
           if (element_i.category_id.toString() == element_j._id.toString()) {
+            const sub_cate = await sub_category_schema.findOne({_id:element_i.sub_category.toString()});
             let obj = {
               description: element_i.description,
               title: element_i.title,
@@ -76,7 +81,9 @@ const imageArticles = {
               category_name: element_j.category_name,
               _id: element_i._id,
               isFeatured: element_i.isFeatured,
+              sub_cate: sub_cate.sub_category_name,
             };
+
             all.push(obj);
           }
         }

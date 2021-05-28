@@ -21,6 +21,10 @@ const Topstory = new schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "categories",
     },
+    sub_category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"subcategories"
+    },
     isFeatured: {
       type: Boolean,
       required: false,

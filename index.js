@@ -121,6 +121,7 @@ app.post("/api/SubCategories/add", SubCategories.addCategory);
 app.post("/api/SubCategories/delete", SubCategories.deteleCategory);
 app.post("/api/SubCategories/update", SubCategories.updateCategory);
 app.get("/api/SubCategories/get_all", SubCategories.get_all_Category);
+app.post("/api/SubCategories/getone", SubCategories.getone);
 
 // Banners
 let Banner = require("./routes/Banner/Banner");

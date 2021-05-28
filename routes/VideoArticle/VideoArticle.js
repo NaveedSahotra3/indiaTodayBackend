@@ -1,9 +1,10 @@
 const videoArticle = require("../../Models/videoArticleSchema");
 const CategorySchema = require("../../Models/category_schema");
-const imageArticles = {
+
+const vidArticle = {
   create_video: async function (req, res) {
     try {
-      let { title, description, category_id, isFeatured } = req.body;
+      let { title, description, category_id, isFeatured,sub_category } = req.body;
       let image;
       if (req.file) image = `${req.file.fieldname}-${req.file.originalname}`;
 
@@ -15,6 +16,7 @@ const imageArticles = {
         image,
         category_id,
         isFeatured: isFeatured,
+        sub_category
       });
 
       let result = await newUser.save();
@@ -100,4 +102,4 @@ const imageArticles = {
   },
 };
 
-module.exports = imageArticles;
+module.exports = vidArticle;
