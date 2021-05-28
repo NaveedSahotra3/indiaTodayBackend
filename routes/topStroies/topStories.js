@@ -53,11 +53,11 @@ const Topstory = {
         : (data.isFeatured = false);
     }
     delete data.id
-    let update = await story.findOneAndUpdate({ _id: user_id }, data, {
-      isNew: true,
-    });
+    // let update = await story.findOneAndUpdate({ _id: user_id }, data, {
+    //   isNew: true,
+    // });
 
-    return update;
+    return res.json("Successfuly Updated");
   },
   Gets_story: async function (req, res) {
     try {

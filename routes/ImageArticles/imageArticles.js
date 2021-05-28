@@ -51,11 +51,12 @@ const imageArticles = {
         : (data.isFeatured = false);
     }
 
-    let update = await imageArticle.findOneAndUpdate({ _id: user_id }, data, {
-      isNew: true,
-    });
+    // let update = await imageArticle.findOneAndUpdate({ _id: user_id }, data, {
+    //   isNew: true,
+    // });
 
-    return update;
+    return res.json("Successfuly Updated");
+    
   },
 
   Gets_article: async function (req, res) {
