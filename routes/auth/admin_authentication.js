@@ -8,6 +8,7 @@ var nodemailer = require("nodemailer");
 
 const auth = {
   register: function (req, res) {
+    
     let { name, email, password } = req.body;
 
     if (!email || !password) {
@@ -206,5 +207,6 @@ const auth = {
     });
   },
 };
+
 
 module.exports = auth;

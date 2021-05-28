@@ -6,9 +6,26 @@ const admin = require("../../Models/register_schema");
 
 const Editor = {
   addEditor: async function (req, res) {
+    console.log(req.body)
     try {
-      let { name, email, password, admin_id } = req.body;
+      let newEditorStatus = null
+      let newAdminStatus = null
+      let { name, email, password, admin_id , isEditor } = req.body;
       let image;
+    //  isEditor == 'true' ? newEditorStatus = true : false
+    if(isEditor== 'true'){
+
+      newEditorStatus = true
+      newAdminStatus = false
+    }
+    else{
+      newEditorStatus = false
+      newAdminStatus = true
+
+    }
+
+
+     false
       if (req.file) image = `${req.file.fieldname}-${req.file.originalname}`;
       if (!email || !password) {
         return res.send("Must include email and password");
@@ -29,14 +46,19 @@ const Editor = {
         name,
         password,
         email,
-        image
+        image,
+        isEditor : newEditorStatus,
+        isAdmin : newAdminStatus
       });
+      console.log(newEditor)
+
       // Hash the password
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newEditor.password, salt, (err, hash) => {
           if (err) throw err;
           newEditor.password = hash;
           newEditor.save().then((user) => {
+            console.log(user)
             return res.status(201).json({
               success: true,
               msg: "Hurry! editor is now registered.",

@@ -15,7 +15,7 @@ const Categories = new schema(
     },
 
     description: {
-      type: String,
+      type: String, 
       trim: true,
       max: 64,
     },

@@ -10,6 +10,15 @@ const signup = new Schema(
       required: true,
       max: 64,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
+    isEditor : {
+
+      type: Boolean,
+      default: false
+    },
     email: {
       type: String,
       trim: true,
