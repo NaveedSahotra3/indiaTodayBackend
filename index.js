@@ -133,6 +133,7 @@ app.post("/api/banner/add", upload.single("image"), Banner.add);
 app.post("/api/banner/delete", Banner.detele);
 app.post("/api/banner/update", upload.single("image") ,Banner.update);
 app.get("/api/banner/get_all", Banner.get_all);
+app.post("/api/banner/get_by_position", Banner.get_by_position);
 
 // Header
 let Header = require("./routes/Header/Header");

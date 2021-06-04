@@ -51,7 +51,7 @@ const Banners = {
         ? (data.isFeatured = true)
         : (data.isFeatured = false);
     }
-    delete data.id
+    delete data.id;
     let update = await Banner.findOneAndUpdate({ _id: user_id }, data, {
       isNew: true,
     });
@@ -63,6 +63,15 @@ const Banners = {
     try {
       const user = await Banner.find();
       res.json(user);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  get_by_position: async function (req, res) {
+    try {
+      let data = Object.assign({}, req.body);
+      const banner = await Banner.find({ banner_type: data.banner_type });
+      res.json(banner);
     } catch (error) {
       console.log(error);
     }

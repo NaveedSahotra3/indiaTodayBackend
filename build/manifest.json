@@ -1,25 +1,47 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+  "name": "Indiatoday",
+  "short_name": "Indiatoday",
+  "icons": [{
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/chrome-touch-icon-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },
+  {
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/icon-128x128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  },
+  {
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/ms-touch-icon-144x144-preco.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  },
+  {
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/medium-icon.png",
+    "sizes": "96x96",
+    "type": "image/png"
+  },
+  {
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/icon-256x256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  },
+  {
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/icon-384x384.png",
+    "sizes": "384x384",
+    "type": "image/png"
+  },
+  {
+    "src": "https://akm-img-a-in.tosshub.com/indiatoday/images/misc/icon-512x512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }
   ],
-  "start_url": ".",
+  "start_url": "https://www.indiatoday.in",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "natural",
+  "background_color": "#fff",
+  "theme_color": "#C04A4A",  
+  "gcm_sender_id": "393239297034", 
+  "gcm_user_visible_only": true 
 }

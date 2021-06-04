@@ -6,7 +6,7 @@ const Footer = new schema(
   {
     footer_position: {
       type: Number,
-      enum: [1, 2,3,4], // 1 << first from R2L, 2 << second from R2L,3 << third from R2F,4 << forth from R2F
+      enum: [1, 2,3,4,5,6], // 1 << first from R2L, 2 << second from R2L,3 << third from R2F,4 << forth from R2F
       default: 1,
     },
     description: {
@@ -16,7 +16,7 @@ const Footer = new schema(
     status: {
       type: Number,
       enum: [1, 2], // 1 << Active, 2 << Disable
-      default: 2,
+      default: 1,
     },
   },
   {

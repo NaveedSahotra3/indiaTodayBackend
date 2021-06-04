@@ -11,6 +11,9 @@
 # git
 /.git_hub
 /.git_heroku
+/.git_front
+/.git_admin
+
 
 
 # production
