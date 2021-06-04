@@ -87,6 +87,8 @@ app.post("/api/create_story", upload.single("image"), topstory.create_story);
 app.post("/api/delete_story", topstory.Delete_story);
 app.post("/api/update_story", upload.single("image"),  topstory.Update_story);
 app.get("/api/gets_story", topstory.Gets_story);
+app.post("/api/getone_story", topstory.GetOne_story);
+
 app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
 
 // Video Crud
