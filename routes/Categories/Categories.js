@@ -101,6 +101,7 @@ const Category = {
         }
         all.push(obj)
       }
+      // console.log(all)
 
       res.json(all);
     } catch (error) {
