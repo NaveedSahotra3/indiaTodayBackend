@@ -2,11 +2,11 @@ const imageArticle = require("../../Models/imageArticle_schema");
 const CategorySchema = require("../../Models/category_schema");
 const sub_category_schema = require("../../Models/sub_category_schema");
 
-
 const imageArticles = {
   create_article: async function (req, res) {
     try {
-      let { title, description, category_id, isFeatured,sub_category } = req.body;
+      let { title, description, category_id, isFeatured, sub_category } =
+        req.body;
       let image;
       if (req.file) image = `${req.file.fieldname}-${req.file.originalname}`;
 
@@ -18,7 +18,7 @@ const imageArticles = {
         image,
         category_id,
         isFeatured: isFeatured,
-        sub_category
+        sub_category,
       });
 
       let result = await newUser.save();
@@ -60,7 +60,6 @@ const imageArticles = {
     // });
 
     return res.json("Successfuly Updated");
-    
   },
 
   Gets_article: async function (req, res) {
@@ -74,7 +73,9 @@ const imageArticles = {
         for (let j = 0; j < cate.length; j++) {
           const element_j = cate[j];
           if (element_i.category_id.toString() == element_j._id.toString()) {
-            const sub_cate = await sub_category_schema.findOne({_id:element_i.sub_category.toString()});
+            const sub_cate = await sub_category_schema.findOne({
+              _id: element_i.sub_category.toString(),
+            });
             let obj = {
               description: element_i.description,
               title: element_i.title,
@@ -104,6 +105,16 @@ const imageArticles = {
       console.log(error);
     }
   },
+  getOneArticle: async function (req, res) {
+    try {
+      let data = Object.assign({}, req.body);
+      const article = await imageArticle.find({ _id: data.id });
+
+      return res.json(article);
+    } catch (error) {
+      console.log(error);
+    }
+  },  
 };
 
 module.exports = imageArticles;
