@@ -54,25 +54,21 @@ const Topstory = {
         ? (data.isFeatured = true)
         : (data.isFeatured = false);
     }
-    delete data.id
+    delete data.id;
     // let update = await story.findOneAndUpdate({ _id: user_id }, data, {
     //   isNew: true,
     // });
-
     return res.json("Successfuly Updated");
   },
   GetOne_story: async function (req, res) {
     console.log(req.body);
 
-    let find = await story.findById(req.body.id);
+    let find = await story.find({_id:req.body.id});
 
     if (find) {
-    
-      
       return res.json(find);;
-    } else {
-      throw new Error("Story not Found");
-    }
+    } 
+
   },
   
   Gets_story: async function (req, res) {
