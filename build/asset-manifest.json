@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.dd7c9f77.chunk.css",
-    "main.js": "/static/js/main.3d94a3ee.chunk.js",
-    "main.js.map": "/static/js/main.3d94a3ee.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.5954929f.js",
-    "runtime-main.js.map": "/static/js/runtime-main.5954929f.js.map",
+    "main.css": "/static/css/main.30807471.chunk.css",
+    "main.js": "/static/js/main.f48641b7.chunk.js",
+    "main.js.map": "/static/js/main.f48641b7.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1ae5753b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1ae5753b.js.map",
     "static/css/2.d649c8cc.chunk.css": "/static/css/2.d649c8cc.chunk.css",
-    "static/js/2.c2765f45.chunk.js": "/static/js/2.c2765f45.chunk.js",
-    "static/js/2.c2765f45.chunk.js.map": "/static/js/2.c2765f45.chunk.js.map",
-    "static/js/3.399f768e.chunk.js": "/static/js/3.399f768e.chunk.js",
-    "static/js/3.399f768e.chunk.js.map": "/static/js/3.399f768e.chunk.js.map",
+    "static/js/2.15edc06d.chunk.js": "/static/js/2.15edc06d.chunk.js",
+    "static/js/2.15edc06d.chunk.js.map": "/static/js/2.15edc06d.chunk.js.map",
+    "static/js/3.e934bf53.chunk.js": "/static/js/3.e934bf53.chunk.js",
+    "static/js/3.e934bf53.chunk.js.map": "/static/js/3.e934bf53.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.d649c8cc.chunk.css.map": "/static/css/2.d649c8cc.chunk.css.map",
-    "static/css/main.dd7c9f77.chunk.css.map": "/static/css/main.dd7c9f77.chunk.css.map",
-    "static/js/2.c2765f45.chunk.js.LICENSE.txt": "/static/js/2.c2765f45.chunk.js.LICENSE.txt",
+    "static/css/main.30807471.chunk.css.map": "/static/css/main.30807471.chunk.css.map",
+    "static/js/2.15edc06d.chunk.js.LICENSE.txt": "/static/js/2.15edc06d.chunk.js.LICENSE.txt",
     "static/media/Covid_cases__PTI__1200x76842e1.eafc3d6b.jpg": "/static/media/Covid_cases__PTI__1200x76842e1.eafc3d6b.jpg",
     "static/media/farmers_protest_pti3_1200x768c339.b6c4fbd4.jpg": "/static/media/farmers_protest_pti3_1200x768c339.b6c4fbd4.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5954929f.js",
+    "static/js/runtime-main.1ae5753b.js",
     "static/css/2.d649c8cc.chunk.css",
-    "static/js/2.c2765f45.chunk.js",
-    "static/css/main.dd7c9f77.chunk.css",
-    "static/js/main.3d94a3ee.chunk.js"
+    "static/js/2.15edc06d.chunk.js",
+    "static/css/main.30807471.chunk.css",
+    "static/js/main.f48641b7.chunk.js"
   ]
 }

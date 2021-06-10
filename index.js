@@ -37,20 +37,20 @@ var upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg" ||
-    
-      file.mimetype == "video/webm" ||
-      file.mimetype == "video/mp4" ||
-      file.mimetype == "video/mav" 
+      // file.mimetype == "image/png" ||
+      // file.mimetype == "image/jpg" ||
+      // file.mimetype == "image/jpeg" ||      
+      // file.mimetype == "video/webm" ||
+      // file.mimetype == "video/mp4" ||
+      // file.mimetype == "video/mav" 
 
-
+      file
     ) {
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+      // return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+      return cb(new Error("File is required"));
     }
   },
 });
@@ -120,6 +120,7 @@ app.post("/api/categories/delete", Categories.deteleCategory);
 app.post("/api/categories/update", Categories.updateCategory);
 app.get("/api/categories/get_all", Categories.get_all_Category);
 app.post("/api/categories/get_one", Categories.get_one_Category);
+app.get("/api/categories/get_one/get_last_data", Categories.get_latest_data);
 
 
 // Sub-Categories
