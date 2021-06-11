@@ -81,6 +81,7 @@ app.post("/api/update_article",  upload.single("image"), imageArticles.Update_ar
 app.get("/api/gets_article", imageArticles.Gets_article);
 app.get("/api/get_featured_article", imageArticles.getFeaturedItems);
 app.post("/api/get_one_article", imageArticles.getOneArticle);
+app.post("/api/get_articles_by_category", imageArticles.getCategoryArticles);
 
 
 // Top Story

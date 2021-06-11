@@ -98,7 +98,7 @@ const imageArticles = {
   },
   getFeaturedItems: async function (req, res) {
     try {
-      const featuredItems = await imageArticle.find({ isFeatured: true });
+      const featuredItems = await imageArticle.find({ isFeatured: true }).sort({"created_at": -1})
 
       return res.json(featuredItems);
     } catch (error) {
@@ -111,6 +111,21 @@ const imageArticles = {
       const article = await imageArticle.find({ _id: data.id });
 
       return res.json(article);
+    } catch (error) {
+      console.log(error);
+    }
+  },  
+  getCategoryArticles: async function (req, res) {
+    try {
+      let data = Object.assign({}, req.body);
+      let articles = null
+      if(data.category_id){
+        articles = await imageArticle.find({category_id:data.category_id});
+      } 
+      if(data.sub_category){
+        articles = await imageArticle.find({sub_category:data.sub_category});
+      }
+      return res.json(articles);
     } catch (error) {
       console.log(error);
     }
