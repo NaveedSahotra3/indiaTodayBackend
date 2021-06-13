@@ -1,5 +1,6 @@
 const CategorySchema = require("../../Models/category_schema");
 const sub_category_schema = require("../../Models/sub_category_schema");
+const articlesSchema = require("../../Models/imageArticle_schema");
 
 
 const Category = {
@@ -120,6 +121,30 @@ const Category = {
 
       console.log(singleCategory)
       res.json(singleCategory );
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  get_latest_data: async function (req, res) {
+    try {
+      let data = Object.assign({}, req.body);
+      let categoryId = req.body.id;
+      const categories = await CategorySchema.find()
+      const articles = await articlesSchema.find().sort({"created_at": -1}).lean();
+      let obj = []
+
+      for (let index = 0; index < articles.length; index++) {
+        const element = articles[index];
+        for (let j = 0; j < categories.length; j++) {
+          const element_j = categories[j];
+          if(element.category_id.toString() === element_j._id.toString()){
+            element.category_name = element_j.category_name
+          }
+          
+        }
+      }
+      
+      res.json(articles );
     } catch (error) {
       console.log(error);
     }

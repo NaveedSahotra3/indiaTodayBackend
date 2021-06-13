@@ -37,20 +37,20 @@ var upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg" ||
-    
-      file.mimetype == "video/webm" ||
-      file.mimetype == "video/mp4" ||
-      file.mimetype == "video/mav" 
+      // file.mimetype == "image/png" ||
+      // file.mimetype == "image/jpg" ||
+      // file.mimetype == "image/jpeg" ||      
+      // file.mimetype == "video/webm" ||
+      // file.mimetype == "video/mp4" ||
+      // file.mimetype == "video/mav" 
 
-
+      file
     ) {
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+      // return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+      return cb(new Error("File is required"));
     }
   },
 });
@@ -81,6 +81,7 @@ app.post("/api/update_article",  upload.single("image"), imageArticles.Update_ar
 app.get("/api/gets_article", imageArticles.Gets_article);
 app.get("/api/get_featured_article", imageArticles.getFeaturedItems);
 app.post("/api/get_one_article", imageArticles.getOneArticle);
+app.post("/api/get_articles_by_category", imageArticles.getCategoryArticles);
 
 
 // Top Story
@@ -103,6 +104,8 @@ app.post(
 app.post("/api/delete_video", videoArticle.Delete_video);
 app.post("/api/update_video",upload.single("image"),  videoArticle.Update_video);
 app.get("/api/gets_video", videoArticle.Gets_video);
+app.post("/api/get_one_video", videoArticle.Get_one_video);
+
 app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
 
 // Editor CRUD by admin only
@@ -120,6 +123,7 @@ app.post("/api/categories/delete", Categories.deteleCategory);
 app.post("/api/categories/update", Categories.updateCategory);
 app.get("/api/categories/get_all", Categories.get_all_Category);
 app.post("/api/categories/get_one", Categories.get_one_Category);
+app.get("/api/categories/get_one/get_last_data", Categories.get_latest_data);
 
 
 // Sub-Categories

@@ -91,6 +91,20 @@ const vidArticle = {
       console.log(error);
     }
   },
+
+
+  Get_one_video: async function (req, res) {
+    console.log(req.body.id);
+
+    let find = await videoArticle.find({_id:req.body.id});
+
+    if (find) {
+      return res.json(find);;
+    } 
+
+  },
+
+
   getFeaturedItems: async function (req, res) {
     try {
       const featuredItems = await videoArticle.find({ isFeatured: true });
