@@ -1,6 +1,6 @@
 const CategorySchema = require("../../Models/category_schema");
 const sub_category_schema = require("../../Models/sub_category_schema");
-const articlesSchema = require("../../Models/imageArticle_schema");
+// const articlesSchema = require("../../Models/imageArticle_schema");
 
 
 const Category = {

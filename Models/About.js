@@ -2,17 +2,21 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema;
 
-const videoArticle = new schema(
+const AboutCrud = new schema(
   {
-    videolink: {
-      type: String,
-      required:false
-    },
+    
 
+    description: {
+      type: String,
+      required: false,
+    },
+  
+   
+  
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
   }
 );
 
-module.exports = mongoose.model("videoArticle", videoArticle);
+module.exports = mongoose.model("about", AboutCrud);

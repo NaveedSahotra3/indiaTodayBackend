@@ -70,35 +70,35 @@ app.post("/api/guest", auth.Guest);
 app.post("/api/get_profile", auth.getProfile);
 
 // image base article CRUD
-let imageArticles = require("./routes/ImageArticles/imageArticles");
-app.post(
-  "/api/create_article",
-  upload.single("image"),
-  imageArticles.create_article
-);
-app.post("/api/delete_article", imageArticles.Delete_article);
-app.post("/api/update_article",  upload.single("image"), imageArticles.Update_article);
-app.get("/api/gets_article", imageArticles.Gets_article);
-app.get("/api/get_featured_article", imageArticles.getFeaturedItems);
-app.post("/api/get_one_article", imageArticles.getOneArticle);
-app.post("/api/get_articles_by_category", imageArticles.getCategoryArticles);
+
+// Team Member
+let TeamMember = require("./routes/teamMember/teamMember");
 
 
-// Top Story
-let topstory = require("./routes/topStroies/topStories");
-app.post("/api/create_story", upload.single("image"), topstory.create_story);
-app.post("/api/delete_story", topstory.Delete_story);
-app.post("/api/update_story", upload.single("image"),  topstory.Update_story);
-app.get("/api/gets_story", topstory.Gets_story);
-app.post("/api/getone_story", topstory.GetOne_story);
+app.post( "/api/create_article", upload.single("image"),  TeamMember.create_article);
+app.post("/api/delete_article", TeamMember.Delete_article);
+app.post("/api/update_team",  upload.single("image"), TeamMember.Update_team);
+app.get("/api/gets_article", TeamMember.Gets_article);
+app.get("/api/get_featured_article", TeamMember.getFeaturedItems);
+app.post("/api/get_one_article", TeamMember.getOneArticle);
+app.post("/api/get_articles_by_category", TeamMember.getCategoryArticles);
 
-app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
+
+// AboutCrud
+let AboutCrud = require("./routes/aboutCrud/aboutCrud");
+app.post("/api/create_story", AboutCrud.create_AboutCrud);
+app.post("/api/delete_story", AboutCrud.Delete_AboutCrud);
+app.post("/api/update_aboutcrud", upload.single("image"),  AboutCrud.Update_AboutCrud);
+app.get("/api/gets_aboutcrud", AboutCrud.Gets_AboutCrud);
+app.post("/api/getone_aboutcrud", AboutCrud.GetOne_AboutCrud);
+
+
 
 // Video Crud
 let videoArticle = require("./routes/VideoArticle/VideoArticle");
 app.post(
   "/api/create_video",
-  upload.single("image"),
+ 
   videoArticle.create_video
 );
 app.post("/api/delete_video", videoArticle.Delete_video);
@@ -106,65 +106,45 @@ app.post("/api/update_video",upload.single("image"),  videoArticle.Update_video)
 app.get("/api/gets_video", videoArticle.Gets_video);
 app.post("/api/get_one_video", videoArticle.Get_one_video);
 
-app.get("/ap/get_featured_topstory", imageArticles.getFeaturedItems);
-
-// Editor CRUD by admin only
-let Editor = require("./routes/Editor/Editor");
-app.post("/api/editor/add", upload.single("image"), Editor.addEditor);
-app.post("/api/editor/delete", Editor.deteleEditor);
-app.post("/api/editr/update", Editor.updateEditor);
-app.get("/api/editor/get_all", Editor.get_all_Editor);
-app.post("/api/editor/login", Editor.login);
-
-// Categories
-let Categories = require("./routes/Categories/Categories");
-app.post("/api/categories/add", upload.single("image"), Categories.addCategory);
-app.post("/api/categories/delete", Categories.deteleCategory);
-app.post("/api/categories/update", Categories.updateCategory);
-app.get("/api/categories/get_all", Categories.get_all_Category);
-app.post("/api/categories/get_one", Categories.get_one_Category);
-app.get("/api/categories/get_one/get_last_data", Categories.get_latest_data);
 
 
-// Sub-Categories
-let SubCategories = require("./routes/SubCategories/SubCategories");
-app.post("/api/SubCategories/add", SubCategories.addCategory);
-app.post("/api/SubCategories/delete", SubCategories.deteleCategory);
-app.post("/api/SubCategories/update", SubCategories.updateCategory);
-app.get("/api/SubCategories/get_all", SubCategories.get_all_Category);
-app.post("/api/SubCategories/getone", SubCategories.getone);
+// Talkshow
 
-// Banners
-let Banner = require("./routes/Banner/Banner");
-app.post("/api/banner/add", upload.single("image"), Banner.add);
-app.post("/api/banner/delete", Banner.detele);
-app.post("/api/banner/update", upload.single("image") ,Banner.update);
-app.get("/api/banner/get_all", Banner.get_all);
-app.post("/api/banner/get_by_position", Banner.get_by_position);
+let Talkshow = require('./routes/talkshow/Talkshow')
 
-// Header
-let Header = require("./routes/Header/Header");
-app.post("/api/header/add", Header.add);
-app.post("/api/header/delete", Header.detele);
-app.post("/api/header/update", Header.update);
-app.get("/api/header/get_all", Header.get_all);
-app.post("/api/header/get_one", Header.get_one);
+app.post("/api/talkshow/add", upload.single("image"), Talkshow.Create);
+app.post("/api/talkshow/update", upload.single("image"), Talkshow.Update);
 
-// Footer
-let Footer = require("./routes/Footer/Footer");
-app.post("/api/footer/add", Footer.add);
-app.post("/api/footer/delete", Footer.detele);
-app.post("/api/footer/update", Footer.update);
-app.get("/api/footer/get_all", Footer.get_all);
-app.post("/api/footer/get_one", Footer.get_one);
+app.post("/api/talkshow/delete" , Talkshow.Delete_TalkShow)
+app.get("/api/talkshow/get" , Talkshow.Gets_talkshows)
 
-// SideBar
-let SideBar = require("./routes/SideBar/SideBar");
-app.post("/api/sidebar/add", SideBar.add);
-app.post("/api/sidebar/delete", SideBar.detele);
-app.post("/api/sidebar/update", SideBar.update);
-app.get("/api/sidebar/get_all", SideBar.get_all);
-app.post("/api/sidebar/get_one", SideBar.get_one);
+// Magzine
+
+let Magzine = require('./routes/magzine/Magzine')
+app.post("/api/magzine/add", upload.single("image"), Magzine.Create);
+app.post("/api/magzine/update", upload.single("image"), Magzine.Update_magzine);
+
+app.get("/api/magzine/get" , Magzine.Gets_Magzines)
+app.post("/api/magzine/delete" , Magzine.Delete_Magzine)
+
+
+
+
+// Gallery
+
+let Gallery = require("./routes/gallery/gallery")
+
+app.post("/api/gallery/create" , upload.single("image") , Gallery.create_gallery)
+
+app.post("/api/gallery/update" , upload.single("image") , Gallery.update_gallery)
+
+app.post("/api/gallery/delete", Gallery.delete_gallery)
+
+app.get("/api/gallery/gets"  , Gallery.gets_gallery)
+
+
+
+
 
 
 
